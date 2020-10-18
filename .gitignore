@@ -3,3 +3,5 @@ bin
 obj
 packages
 *.nupkg
+.DS_Store
+.ionide

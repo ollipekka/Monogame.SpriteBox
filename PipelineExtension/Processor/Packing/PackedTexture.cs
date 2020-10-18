@@ -21,6 +21,6 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
         /// <summary>
         /// Texture containing many individual sprites.
         /// </summary>
-        public Bitmap Texture;
+        public SixLabors.ImageSharp.Image Texture;
     }
 }

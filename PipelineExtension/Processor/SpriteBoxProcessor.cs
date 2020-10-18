@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using GlobExpressions;
@@ -12,6 +11,7 @@ using Microsoft.Xna.Framework.Content.Pipeline.Processors;
 using Microsoft.Xna.Framework.Graphics;
 using Monogame.SpriteBox.PipelineExtension.Importer;
 using Monogame.SpriteBox.PipelineExtension.Processor.Packing;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Monogame.SpriteBox.PipelineExtension.Processor
 {
@@ -168,7 +168,7 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor
 
             using ( var stream = new FileStream( outputPath, FileMode.Create ) )
             {
-                packedTexture.Texture.Save( stream, ImageFormat.Png );
+                packedTexture.Texture.Save(stream, new PngEncoder());
             }
 
             context.AddOutputFile( outputPath );

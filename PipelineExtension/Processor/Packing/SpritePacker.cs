@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
 {
@@ -42,9 +43,9 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
                 .ToArray();
         }
 
-        static Bitmap BuildTexture( Sprite[] sprites, int width, int height, int padding )
+        static SixLabors.ImageSharp.Image BuildTexture( Sprite[] sprites, int width, int height, int padding )
         {
-            var texture = new Bitmap( width, height, PixelFormat.Format32bppArgb );
+            var texture = new SixLabors.ImageSharp.Image<Rgba32>( width, height);
 
             // For all sprites, copy their pixel data over to the final texture based on the positions previously determined.
             //
@@ -60,7 +61,7 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
                             throw new Exception( $"Sprite index is {sprite.Index} of {sprites.Length}. Y = {tempY}, Height = {height}" );
                         }
 
-                        texture.SetPixel( sprite.X + x + padding, sprite.Y + y + padding, sprite.Bitmap.GetPixel( x, y ) );
+                        texture[sprite.X + x + padding, sprite.Y + y + padding] = sprite.Bitmap[x, y] ;
                     }
                 }
             }
@@ -167,7 +168,7 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
 
             for ( int i = 0; i < spritePaths.Length; i++ )
             {
-                var bitmap = Image.FromFile( spritePaths[i] ) as Bitmap;
+                var bitmap = SixLabors.ImageSharp.Image.Load<Rgba32>( spritePaths[i] );
 
                 if ( bitmap == null )
                 {

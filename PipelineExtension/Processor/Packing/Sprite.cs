@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
 {
@@ -10,7 +11,7 @@ namespace Monogame.SpriteBox.PipelineExtension.Processor.Packing
         /// <summary>
         /// Bitmap content of this sprite.
         /// </summary>
-        public Bitmap Bitmap;
+        public SixLabors.ImageSharp.Image<Rgba32> Bitmap;
 
         /// <summary>
         /// Path to the sprite on the local file system.
